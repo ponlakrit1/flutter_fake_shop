@@ -2,22 +2,26 @@ import 'package:flutter/material.dart';
 
 class FsInput extends StatefulWidget {
   final TextEditingController controller;
-  final String hintText;
-  final bool obscureText;
+  final String? hintText;
+  final bool? obscureText;
   final Icon? prefixIcon;
+  final Icon? suffixIcon;
   final String? errorText;
-  final Function(String) onChanged;
-  final String? Function(String?) validator;
+  final OutlineInputBorder? border;
+  final Function(String)? onChanged;
+  final String? Function(String?)? validator;
 
   const FsInput({
     super.key,
     required this.controller,
-    required this.hintText,
-    required this.obscureText,
+    this.hintText,
+    this.obscureText,
     this.prefixIcon,
+    this.suffixIcon,
     this.errorText,
-    required this.onChanged,
-    required this.validator,
+    this.border,
+    this.onChanged,
+    this.validator,
   });
 
   @override
@@ -31,7 +35,7 @@ class _InputWidgetState extends State<FsInput> {
   void initState() {
     super.initState();
 
-    visibility = widget.obscureText;
+    visibility = widget.obscureText ?? false;
   }
 
   @override
@@ -46,9 +50,7 @@ class _InputWidgetState extends State<FsInput> {
         obscureText: visibility,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
+          border: widget.border,
           contentPadding: const EdgeInsets.symmetric(
             vertical: 8.0,
             horizontal: 8.0,
@@ -56,29 +58,33 @@ class _InputWidgetState extends State<FsInput> {
           hintText: widget.hintText,
           prefixIcon: widget.prefixIcon,
           prefixIconColor: Colors.grey,
-          suffixIcon: widget.obscureText
-              ? IconButton(
-                  icon: visibility
-                      ? const Icon(
-                          Icons.visibility_off_outlined,
-                          color: Colors.grey,
-                        )
-                      : const Icon(
-                          Icons.visibility_outlined,
-                          color: Colors.grey,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      visibility = !visibility;
-                    });
-                  },
-                )
-              : null,
+          suffixIcon: widget.obscureText != null
+              ? _buildPasswordSuffixIcon()
+              : widget.suffixIcon,
           errorText: widget.errorText,
         ),
         onChanged: widget.onChanged,
         validator: widget.validator,
       ),
+    );
+  }
+
+  Widget _buildPasswordSuffixIcon() {
+    return IconButton(
+      icon: visibility
+          ? const Icon(
+              Icons.visibility_off_outlined,
+              color: Colors.grey,
+            )
+          : const Icon(
+              Icons.visibility_outlined,
+              color: Colors.grey,
+            ),
+      onPressed: () {
+        setState(() {
+          visibility = !visibility;
+        });
+      },
     );
   }
 }
