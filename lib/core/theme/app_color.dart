@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const MaterialColor primary = MaterialColor(0xFF842CDD, <int, Color>{
-    50: Color(0xFFF1E7FB),
-    100: Color(0xFFDBC5F5),
-    200: Color(0xFFC39EEF),
-    300: Color(0xFFAB74E9),
-    400: Color(0xFF9852E3),
-    500: Color(0xFF842CDD),
-    600: Color(0xFF7A27D6),
-    700: Color(0xFF6C1CCD),
-    800: Color(0xFF5E13C7),
-    900: Color(0xFF4900B9),
+  static const MaterialColor primary = MaterialColor(0xFF4c49ac, <int, Color>{
+    50: Color(0xFFe9eaf6),
+    100: Color(0xFFc9cbea),
+    200: Color(0xFFa6a9db),
+    300: Color(0xFF8387cd),
+    400: Color(0xFF6a6cc1),
+    500: Color(0xFF5251b6),
+    600: Color(0xFF4c49ac),
+    700: Color(0xFF443fa0),
+    800: Color(0xFF3c3594),
+    900: Color(0xFF30227e),
   });
 
-  static const MaterialColor secondary = MaterialColor(0xffe2105f, <int, Color>{
-    50: Color(0xFFfbe3eb),
-    100: Color(0xFFf6b9ce),
-    200: Color(0xFFf08cae),
-    300: Color(0xFFeb5e8f),
-    400: Color(0xFFe63a76),
-    500: Color(0xFFe2105f),
-    600: Color(0xFFd10e5c),
-    700: Color(0xFFbc0c57),
-    800: Color(0xFFa70853),
-    900: Color(0xFF82044b),
+  static const MaterialColor secondary = MaterialColor(0xFF98beff, <int, Color>{
+    50: Color(0xFFe4efff),
+    100: Color(0xFFbfd7ff),
+    200: Color(0xFF98beff),
+    300: Color(0xFF76a4fa),
+    400: Color(0xFF6791f5),
+    500: Color(0xFF617eed),
+    600: Color(0xFF5f70dd),
+    700: Color(0xFF5b5ec9),
+    800: Color(0xFF564cb4),
+    900: Color(0xFF4d2b91),
   });
 
   static const MaterialColor neutral = MaterialColor(0xFFc2c2c2, <int, Color>{

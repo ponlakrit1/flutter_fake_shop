@@ -1,108 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fake_shop/core/theme/text_theme_extension.dart';
+import 'package:flutter_fake_shop/core/widget/fs_input.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
 
+  LoginScreen({super.key});
+
   final _formKey = GlobalKey<FormState>();
+
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _signinForm(context),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Image.asset(
+                  'assets/images/auth/login_header.png',
+                  width: 240.0,
+                  height: 240.0,
+                ),
+              ),
+              const SizedBox(height: 24.0),
+              Text(
+                'Here we go',
+                style: Theme.of(context).textTheme.h1.copyWith(fontSize: 32),
+              ),
+              Text(
+                'Welcome',
+                style: Theme.of(context).textTheme.h4,
+              ),
+              const SizedBox(height: 36.0),
+              FsInput(
+                controller: _emailCtrl,
+                hintText: 'Email',
+                obscureText: false,
+                prefixIcon: const Icon(Icons.email_outlined),
+                // errorText: state is LoginFailedValidateEmail
+                //     ? state.emailErrorMsg
+                //     : null,
+                onChanged: (text) {},
+                validator: (text) {
+                  // if (!EmailValidator.validate(text!)) {
+                  //   return 'กรุณากรอกอีเมลให้ถูกต้อง (you@example.com)';
+                  // }
+
+                  return null;
+                },
+              ),
+              FsInput(
+                controller: _passwordCtrl,
+                hintText: 'Password',
+                obscureText: true,
+                prefixIcon: const Icon(Icons.enhanced_encryption_outlined),
+                // errorText: state is LoginFailedValidatePassword
+                //     ? state.passwordErrorMsg
+                //     : null,
+                onChanged: (text) {},
+                validator: (text) {
+                  if (text!.length < 8) {
+                    return 'กรุณากรอกรหัสผ่าน (อย่างน้อย 8 ตัวอักษร)';
+                  }
+
+                  return null;
+                },
+              ),
+              const SizedBox(height: 36.0),
+              _signinButton(context, _formKey),
+              _firstTime(context),
+            ],
+          ),
+        ),
+      ),
     );
   }
-
-  Widget _signinForm(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 0, left: 50, right: 50),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(children: <Widget>[
-              // VerticalText(),
-              _textLogin(context),
-            ]),
-            _usernameField(context),
-            _passwordField(context),
-            _forgotPassword(context),
-            _signinButton(context, _formKey),
-            _firstTime(context),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-Widget _usernameField(BuildContext context) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    child: TextFormField(
-      style: TextStyle(
-        color: Colors.purple,
-      ),
-      decoration: InputDecoration(
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.purple),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.purple),
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.purple),
-        ),
-        // border: InputBorder.,
-        fillColor: Colors.lightBlueAccent,
-        labelText: 'Name',
-        labelStyle: TextStyle(
-          fontFamily: 'SukumvitSetSemiBold',
-          fontSize: 12,
-          color: Colors.purple,
-        ),
-      ),
-      validator: (value) => 'Username is too short',
-      onChanged: (value) => {},
-    ),
-  );
-}
-
-Widget _passwordField(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      top: 20,
-    ),
-    child: Container(
-      height: 80,
-      width: MediaQuery.of(context).size.width,
-      child: TextFormField(
-        style: TextStyle(
-          color: Colors.purple,
-        ),
-        obscureText: true,
-        decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
-          ),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
-          ),
-          // border: InputBorder.none,
-          labelText: 'Password',
-          labelStyle: TextStyle(
-            fontFamily: 'SukumvitSetSemiBold',
-            fontSize: 14,
-            color: Colors.purple,
-          ),
-        ),
-        validator: (value) => 'Password is too short',
-        onChanged: (value) => {},
-      ),
-    ),
-  );
 }
 
 Widget _signinButton(BuildContext context, _formKey) {
@@ -188,65 +168,4 @@ Widget _firstTime(BuildContext context) {
       ),
     ),
   );
-}
-
-Widget _forgotPassword(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      top: 15,
-      left: 150,
-    ),
-    child: Container(
-      alignment: Alignment.topRight,
-      height: 20,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          'Forgot Password?',
-          style: TextStyle(
-            fontFamily: 'SukumvitSetSemiBold',
-            fontSize: 14,
-            color: Colors.purple,
-          ),
-          textAlign: TextAlign.right,
-        ),
-      ),
-    ),
-  );
-}
-
-Widget _textLogin(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(
-      top: 0,
-    ),
-    child: Container(
-      //color: Colors.green,
-      height: 200,
-      width: 200,
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 60,
-          ),
-          Center(
-            child: Text(
-              'Here we go Welcome',
-              style: TextStyle(
-                fontFamily: 'SukumvitSetSemiBold',
-                fontSize: 24,
-                color: Colors.purple,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-void _showSnackBar(BuildContext context, String message) {
-  final snackBar = SnackBar(content: Text(message));
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
