@@ -33,6 +33,7 @@ dependencies:
   dio: ^5.7.0
   json_annotation: ^4.9.0
   dartz: ^0.10.1
+  introduction_screen: ^3.1.14
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter:
     - .env.dev
     - assets/images/
     - assets/images/auth/
+    - assets/images/on_boarding/
 
   fonts:
     - family: NotoSansThais
