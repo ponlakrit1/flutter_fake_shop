@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fake_shop/core/theme/app_color.dart';
 import 'package:flutter_fake_shop/core/theme/text_theme_extension.dart';
 import 'package:flutter_fake_shop/core/widget/fs_button.dart';
-import 'package:flutter_fake_shop/features/home/presentation/page/bottom_navigator_screen.dart';
+import 'package:flutter_fake_shop/features/product/presentation/page/product_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -14,7 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(BuildContext context) {
-    context.goNamed(BottomNavigatorScreen.routeName);
+    context.goNamed(ProductScreen.routeName);
   }
 
   Widget _buildIntroductionImage(int seq) {
