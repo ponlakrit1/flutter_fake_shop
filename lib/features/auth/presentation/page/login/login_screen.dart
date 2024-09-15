@@ -6,6 +6,8 @@ import 'package:flutter_fake_shop/core/theme/text_theme_extension.dart';
 import 'package:flutter_fake_shop/core/widget/fs_button.dart';
 import 'package:flutter_fake_shop/core/widget/fs_input.dart';
 import 'package:flutter_fake_shop/features/auth/presentation/page/login/bloc/login_bloc.dart';
+import 'package:flutter_fake_shop/features/home/presentation/page/on_boarding_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
@@ -25,7 +27,7 @@ class LoginScreen extends StatelessWidget {
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-              //
+              context.goNamed(OnBoardingScreen.routeName);
             }
           },
           builder: (context, state) {
