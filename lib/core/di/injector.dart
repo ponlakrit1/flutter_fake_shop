@@ -14,7 +14,9 @@ final GetIt injector = GetIt.instance;
 Future<void> initializeDependencies() async {
   //! Bloc
   injector.registerFactory(
-    () => LoginBloc(),
+    () => LoginBloc(
+      userLoginUsecase: injector(),
+    ),
   );
 
   // Use cases

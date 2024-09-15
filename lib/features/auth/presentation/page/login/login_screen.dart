@@ -23,7 +23,11 @@ class LoginScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) => injector<LoginBloc>(),
         child: BlocConsumer<LoginBloc, LoginState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is LoginSuccessState) {
+              //
+            }
+          },
           builder: (context, state) {
             return Form(
               key: _formKey,
@@ -58,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      errorText: state is LoginFailedValidateEmail
+                      errorText: state is LoginFailedValidateEmailState
                           ? state.emailErrorMsg
                           : null,
                       validator: (text) {
@@ -82,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
-                      errorText: state is LoginFailedValidatePassword
+                      errorText: state is LoginFailedValidatePasswordState
                           ? state.passwordErrorMsg
                           : null,
                       validator: (text) {
@@ -96,7 +100,15 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 36.0),
                     FsButton(
                       buttonColor: AppColor.primary,
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          BlocProvider.of<LoginBloc>(context)
+                              .add(AuthenticationEvent(
+                            email: _emailCtrl.text,
+                            password: _passwordCtrl.text,
+                          ));
+                        }
+                      },
                       label: 'Sign in',
                     ),
                     const SizedBox(height: 24.0),

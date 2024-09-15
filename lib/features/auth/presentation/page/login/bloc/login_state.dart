@@ -7,16 +7,16 @@ sealed class LoginState extends Equatable {
   List<Object> get props => [];
 }
 
-final class LoginInitial extends LoginState {}
+final class LoginInitialState extends LoginState {}
 
-class LoginSuccess extends LoginState {}
+class LoginSuccessState extends LoginState {}
 
-class LoginFailed extends LoginState {}
+class LoginFailedState extends LoginState {}
 
-class LoginFailedValidateEmail extends LoginState {
+class LoginFailedValidateEmailState extends LoginState {
   final String emailErrorMsg;
 
-  const LoginFailedValidateEmail({
+  const LoginFailedValidateEmailState({
     required this.emailErrorMsg,
   });
 
@@ -24,10 +24,10 @@ class LoginFailedValidateEmail extends LoginState {
   List<Object> get props => [emailErrorMsg];
 }
 
-class LoginFailedValidatePassword extends LoginState {
+class LoginFailedValidatePasswordState extends LoginState {
   final String passwordErrorMsg;
 
-  const LoginFailedValidatePassword({
+  const LoginFailedValidatePasswordState({
     required this.passwordErrorMsg,
   });
 
